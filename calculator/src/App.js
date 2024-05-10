@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
@@ -25,10 +24,12 @@ function App() {
   }
 
   function handleEvaluateUpdate(evaluationType){
-    // only support equals eval type for now
-    if (evaluationType === "="){
-      setOutput(eval(expression.join('')));
-      setExpression([]);
+    if (!expressions.includes(expression.at(-1))){
+      // only support equals eval type for now
+      if (evaluationType === "="){
+        setOutput(eval(expression.join('')));
+        setExpression([]);
+      }
     }
   }
 
@@ -36,22 +37,26 @@ function App() {
     <>
       <h1>{expression}</h1>
       <h1>{output}</h1>
-      <button onClick={() => handleOperationUpdate("+")}>+</button>
-      <button onClick={() => handleOperationUpdate("-")}>-</button>
-      <button onClick={() => handleOperationUpdate("*")}>*</button>
-      <button onClick={() => handleOperationUpdate("/")}>/</button>
-
-      <button onClick={() => handleNumberUpdate("1")}>1</button>
-      <button onClick={() => handleNumberUpdate("2")}>2</button>
-      <button onClick={() => handleNumberUpdate("3")}>3</button>
-      <button onClick={() => handleNumberUpdate("4")}>4</button>
-      <button onClick={() => handleNumberUpdate("5")}>5</button>
-      <button onClick={() => handleNumberUpdate("6")}>6</button>
-      <button onClick={() => handleNumberUpdate("7")}>7</button>
-      <button onClick={() => handleNumberUpdate("8")}>8</button>
-      <button onClick={() => handleNumberUpdate("9")}>9</button>
-
-      <button onClick={() => handleEvaluateUpdate("=")}>=</button>
+      <div class="grid-container">
+        <button class="grid-item button" onClick={() => handleOperationUpdate("+")}>+</button>
+        <button class="grid-item button" onClick={() => handleOperationUpdate("-")}>-</button>
+        <button class="grid-item button" onClick={() => handleOperationUpdate("*")}>*</button>
+        <button class="grid-item button" onClick={() => handleOperationUpdate("/")}>/</button>
+      </div>
+      <div class="grid-container">
+        <button class="grid-item button" onClick={() => handleNumberUpdate("1")}>1</button>
+        <button class="grid-item button" onClick={() => handleNumberUpdate("2")}>2</button>
+        <button class="grid-item button" onClick={() => handleNumberUpdate("3")}>3</button>
+        <button class="grid-item button" onClick={() => handleNumberUpdate("4")}>4</button>
+        <button class="grid-item button" onClick={() => handleNumberUpdate("5")}>5</button>
+        <button class="grid-item button" onClick={() => handleNumberUpdate("6")}>6</button>
+        <button class="grid-item button" onClick={() => handleNumberUpdate("7")}>7</button>
+        <button class="grid-item button" onClick={() => handleNumberUpdate("8")}>8</button>
+        <button class="grid-item button" onClick={() => handleNumberUpdate("9")}>9</button>
+      </div>
+      <div class="grid-container">
+      <button class="grid-item button" onClick={() => handleEvaluateUpdate("=")}>=</button>
+      </div>
     </>
   );
 }

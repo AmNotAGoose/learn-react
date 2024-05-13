@@ -53,11 +53,26 @@ const colors = {
     'L': 'orange'
 };
 
+
 function Game() {
     const [board, setBoard] = useState([]);
     const [currentPiece, setCurrentPiece] = useState({ shape: [], x: 0, y: 0 });
     const requestRef = useRef();
     const lastUpdateTimeRef = useRef(0);
+
+    const pieceOrder = []
+
+    function Squares() {
+      // board[10][10] = 1; //sussy
+      return(
+        board.map((col, colIndex) => (
+        <>
+          {col.map((row, rowIndex) => (
+            board[colIndex][rowIndex] == 0 ?  <div></div> : (<div key={`${rowIndex}${colIndex}`} id={`${rowIndex}${colIndex}`} className='Game-square' style={{gridColumn: col, gridRow: row}}/>)
+          ))}
+        </>
+      )));
+    }
 
     const createBoard = () => {
         const newBoard = [];
@@ -69,6 +84,22 @@ function Game() {
     }
 
     const movePieceDown = () => {
+      // console.log(board)
+    }
+    
+    // const drawGame = () => {
+    //   for (let row = 0; row < ROWS; row++) {
+    //     for (let col = 0; col < COLS; col++) {
+    //       // console.log(board[row][col])
+          
+    //     }
+    //   }
+    // }
+    const spawnPiece = () =>{
+
+    }
+    
+    const generateBag = () => {
 
     }
 
@@ -78,6 +109,7 @@ function Game() {
           movePieceDown();
           lastUpdateTimeRef.current = time;
         }
+        // drawGame();
         requestRef.current = requestAnimationFrame(updateGame);
     }
 
@@ -97,20 +129,13 @@ function Game() {
         return (<div className="Game">
         <div className='Game-board'>
             <div className="Game-playfield">
-            <div className='Game-square'/>
-                <div className='Game-square' style={{gridColumn: '10', gridRow: '10'}}/>
-                <div className='Game-square'/>
-                <div className='Game-square'/>
-                <div className='Game-square'/>
+              <Squares />
             </div>
             <div className='Game-menu'>
-                        <p>asdsad</p>
+              <p>asdsad</p>
             </div>
         </div>
-            
-        <p>
-        asdsadsa someasjdiajfijehafhjewqurfhwhjuifd
-        </p>
+        <p>asdsadsa someasjdiajfijehafhjewqurfhwhjuifd</p>
     </div>);
     }
 
